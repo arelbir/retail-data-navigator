@@ -35,11 +35,11 @@
 
     --radius: 1rem;
 
-    --sidebar-background: 220 25% 98%;
+    --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 240 10% 3.9%;
     --sidebar-primary: 217 91% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 214 32% 97%;
+    --sidebar-accent: 214 32% 97%; 
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 240 5.9% 90%;
     --sidebar-ring: 215 20.2% 65.1%;
@@ -102,5 +102,3 @@
     @apply transition-all hover:shadow-md hover:bg-secondary/50;
   }
 }
-
-/* Diğer CSS kurallarını temizliyoruz */
