@@ -8,6 +8,7 @@ import KampanyaAnaliziForm from "@/components/kampanya-analizi/KampanyaAnaliziFo
 import OzetVeriPaneli from "@/components/kampanya-analizi/OzetVeriPaneli";
 import DetayVeriTablosu from "@/components/kampanya-analizi/DetayVeriTablosu";
 import { toast } from "sonner";
+import { BarChart, ListFilter, ChevronRight } from "lucide-react";
 
 const KampanyaAnalizi = () => {
   const { 
@@ -35,22 +36,35 @@ const KampanyaAnalizi = () => {
   };
   
   return (
-    <div className="container mx-auto space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold">Kampanya Analizi</h1>
-        <p className="text-muted-foreground mt-2">
-          Mağaza, ürün, tarih ve indirim oranı parametrelerini kullanarak kampanya verilerini analiz edin
-        </p>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-semibold">Kampanya Analizi</h1>
+            <ChevronRight className="h-5 w-5 text-muted-foreground" />
+            <span className="text-muted-foreground">Parametre Seçimi</span>
+          </div>
+          <p className="text-muted-foreground mt-1 text-sm">
+            Mağaza, ürün, tarih ve indirim oranı parametrelerini kullanarak kampanya verilerini analiz edin
+          </p>
+        </div>
       </div>
       
-      <Card>
-        <CardHeader>
-          <CardTitle>Parametre Seçimleri</CardTitle>
-          <CardDescription>
-            Analiz için gerekli parametreleri seçin ve "Verileri Getir" butonuna tıklayın
-          </CardDescription>
+      <Card className="border border-border/40 shadow-sm overflow-hidden">
+        <CardHeader className="bg-secondary/30 border-b border-border/30 pb-4">
+          <div className="flex items-center gap-2">
+            <div className="p-2 rounded-md bg-primary/10">
+              <ListFilter className="h-5 w-5 text-primary" />
+            </div>
+            <div>
+              <CardTitle className="text-lg">Parametre Seçimleri</CardTitle>
+              <CardDescription className="text-xs mt-1">
+                Analiz için gerekli parametreleri seçin ve "Verileri Getir" butonuna tıklayın
+              </CardDescription>
+            </div>
+          </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-6">
           <KampanyaAnaliziForm 
             initialParams={filterParams}
             onSubmit={handleFiltersSubmit} 
@@ -60,17 +74,24 @@ const KampanyaAnalizi = () => {
       </Card>
       
       {dataFetched && (
-        <div className="space-y-8">
+        <div className="space-y-6">
           <OzetVeriPaneli data={filteredBreakEvenData} />
           
-          <Card>
-            <CardHeader>
-              <CardTitle>Model Sonuçları</CardTitle>
-              <CardDescription>
-                Seçilen parametrelere göre filtrelenmiş model sonuçları
-              </CardDescription>
+          <Card className="border border-border/40 shadow-sm">
+            <CardHeader className="bg-secondary/30 border-b border-border/30 pb-4">
+              <div className="flex items-center gap-2">
+                <div className="p-2 rounded-md bg-primary/10">
+                  <BarChart className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <CardTitle className="text-lg">Model Sonuçları</CardTitle>
+                  <CardDescription className="text-xs mt-1">
+                    Seçilen parametrelere göre filtrelenmiş model sonuçları
+                  </CardDescription>
+                </div>
+              </div>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-4">
               <DetayVeriTablosu data={filteredModelResultData} />
             </CardContent>
           </Card>

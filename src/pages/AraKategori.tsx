@@ -22,7 +22,7 @@ import {
   DialogTitle 
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { Pencil, Trash2, Plus } from "lucide-react";
+import { Pencil, Trash2, Plus, ChevronRight, Layers, FileSpreadsheet } from "lucide-react";
 
 const AraKategori = () => {
   const { 
@@ -83,30 +83,41 @@ const AraKategori = () => {
   };
   
   return (
-    <div className="container mx-auto space-y-8">
+    <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Ara Kategori Yönetimi</h1>
-          <p className="text-muted-foreground mt-2">
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-semibold">Ara Kategori Yönetimi</h1>
+            <ChevronRight className="h-5 w-5 text-muted-foreground" />
+            <span className="text-muted-foreground">Veri Listesi</span>
+          </div>
+          <p className="text-muted-foreground mt-1 text-sm">
             Ürünlere ait ara kategori bilgilerini ekleyin ve düzenleyin
           </p>
         </div>
-        <Button onClick={handleAddNew} className="flex items-center gap-2">
+        <Button onClick={handleAddNew} className="flex items-center gap-2 bg-primary hover:bg-primary/90">
           <Plus className="h-4 w-4" />
           Yeni Ekle
         </Button>
       </div>
       
-      <Card>
-        <CardHeader>
-          <CardTitle>Ara Kategori Listesi</CardTitle>
-          <CardDescription>
-            Sistemde kayıtlı olan tüm ara kategori tanımlamaları
-          </CardDescription>
+      <Card className="border border-border/40 shadow-sm">
+        <CardHeader className="bg-secondary/30 border-b border-border/30 pb-4">
+          <div className="flex items-center gap-2">
+            <div className="p-2 rounded-md bg-primary/10">
+              <Layers className="h-5 w-5 text-primary" />
+            </div>
+            <div>
+              <CardTitle className="text-lg">Ara Kategori Listesi</CardTitle>
+              <CardDescription className="text-xs mt-1">
+                Sistemde kayıtlı olan tüm ara kategori tanımlamaları
+              </CardDescription>
+            </div>
+          </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-4">
           <Table>
-            <TableHeader>
+            <TableHeader className="bg-secondary/50">
               <TableRow>
                 <TableHead>Ürün Kodu</TableHead>
                 <TableHead>Ürün Adı</TableHead>
@@ -118,12 +129,15 @@ const AraKategori = () => {
               {intermediateCategories.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={4} className="text-center py-8 text-muted-foreground">
-                    Henüz kayıtlı ara kategori bulunmamaktadır
+                    <div className="flex flex-col items-center justify-center gap-2">
+                      <FileSpreadsheet className="h-10 w-10 text-muted-foreground/40" />
+                      <span>Henüz kayıtlı ara kategori bulunmamaktadır</span>
+                    </div>
                   </TableCell>
                 </TableRow>
               ) : (
                 intermediateCategories.map((item) => (
-                  <TableRow key={item.id}>
+                  <TableRow key={item.id} className="hover:bg-secondary/30">
                     <TableCell>{item.productCode}</TableCell>
                     <TableCell>{item.productName}</TableCell>
                     <TableCell>{item.intermediateCategory}</TableCell>
@@ -133,6 +147,7 @@ const AraKategori = () => {
                           variant="outline"
                           size="sm"
                           onClick={() => handleEdit(item)}
+                          className="h-8 w-8 p-0"
                         >
                           <Pencil className="h-4 w-4" />
                         </Button>
@@ -140,6 +155,7 @@ const AraKategori = () => {
                           variant="destructive"
                           size="sm"
                           onClick={() => handleDelete(item.id)}
+                          className="h-8 w-8 p-0"
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
@@ -155,12 +171,12 @@ const AraKategori = () => {
       
       {/* Add/Edit Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent>
+        <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>
               {isEditMode ? "Ara Kategori Düzenle" : "Yeni Ara Kategori Ekle"}
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="text-xs">
               Ürün ve ara kategori bilgilerini girin ve kaydedin
             </DialogDescription>
           </DialogHeader>
@@ -172,6 +188,7 @@ const AraKategori = () => {
                 id="productCode"
                 value={currentItem.productCode || ""}
                 onChange={(e) => setCurrentItem({...currentItem, productCode: e.target.value})}
+                className="h-9"
               />
             </div>
             
@@ -181,6 +198,7 @@ const AraKategori = () => {
                 id="productName"
                 value={currentItem.productName || ""}
                 onChange={(e) => setCurrentItem({...currentItem, productName: e.target.value})}
+                className="h-9"
               />
             </div>
             
@@ -190,6 +208,7 @@ const AraKategori = () => {
                 id="intermediateCategory"
                 value={currentItem.intermediateCategory || ""}
                 onChange={(e) => setCurrentItem({...currentItem, intermediateCategory: e.target.value})}
+                className="h-9"
               />
             </div>
           </div>
@@ -198,7 +217,7 @@ const AraKategori = () => {
             <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
               İptal
             </Button>
-            <Button onClick={handleSave}>
+            <Button onClick={handleSave} className="bg-primary hover:bg-primary/90">
               Kaydet
             </Button>
           </DialogFooter>
