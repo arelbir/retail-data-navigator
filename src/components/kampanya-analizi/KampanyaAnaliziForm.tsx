@@ -76,7 +76,7 @@ const KampanyaAnaliziForm = ({
               <SelectValue placeholder="Mağaza seçin" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">Tüm Mağazalar</SelectItem>
+              <SelectItem value="all">Tüm Mağazalar</SelectItem>
               {stores.map((store) => (
                 <SelectItem key={store.id} value={store.id}>
                   {store.name}
@@ -116,7 +116,7 @@ const KampanyaAnaliziForm = ({
                 <div 
                   className="px-2 py-1.5 text-sm cursor-pointer hover:bg-secondary"
                   onClick={() => {
-                    setFormParams({ ...formParams, product: "" });
+                    setFormParams({ ...formParams, product: "all" });
                     setProductSearchText("");
                   }}
                 >
