@@ -82,7 +82,7 @@ const Layout = () => {
           
           {/* Main content */}
           <main className="flex-1 overflow-auto bg-secondary/30">
-            <div className="w-full py-6 md:py-8 px-4 md:px-8 animate-fade-in">
+            <div className="w-full max-w-full px-4 md:px-8 py-6 md:py-8 animate-fade-in">
               <div className="md:hidden flex items-center mb-4">
                 <SidebarTrigger />
               </div>
@@ -96,3 +96,4 @@ const Layout = () => {
 };
 
 export default Layout;
+
